@@ -13,13 +13,17 @@ func main() {
 		fmt.Println("no message received")
 	}
 
-	msg := "hi"
-	select {
+	go func() {
+		msg := "hi"
+		messages <- msg
+	}()
+
+	/* select {
 	case messages <- msg:
 		fmt.Println("sent message", msg)
 	default:
 		fmt.Println("no message sent")
-	}
+	} */
 
 	select {
 	case msg := <-messages:
